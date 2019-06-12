@@ -12,6 +12,14 @@ get = (req, res, next) => {
     })
 }
 
+getById = (req, res, next) => {
+  req.models.Listing.findById(req.params.id).then((listing) => {
+    return res.send(listing)
+  }).catch((error) => {
+    next(error)
+  })
+}
+
 post = (req, res, next) => {
   req.models.Listing.create({
     type: req.body.type,
@@ -80,6 +88,7 @@ deleteListing = (req, res, next) => {
 
 module.exports = {
   get,
+  getById,
   post,
   put,
   deleteListing,

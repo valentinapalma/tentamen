@@ -2,6 +2,7 @@
 const sinon = require('sinon');
 
 const mongoose = require('mongoose')
+mongoose.set('debug', true)
 require('sinon-mongoose')
 
 // initialize the app and models
@@ -28,7 +29,7 @@ afterEach(() => {
 
 describe('Listing Integration tests', () => {
 	const request = {
-		"type": "hyresratt",
+		"type": "villa",
 		"address": {
 			"street": "Justastreet",
 			"streetNumber": "18",
@@ -44,7 +45,7 @@ describe('Listing Integration tests', () => {
 	}
 
 	const expected = {
-		"type": "hyresratt",
+		"type": "villa",
 		"address": {
 			"street": "Justastreet",
 			"streetNumber": "18",
@@ -78,6 +79,40 @@ describe('Listing Integration tests', () => {
 			// Then (something should happen)
 				expect(res.status).to.equal(200);
 				expect(res.body).to.eql([expected]);
+				done();
+			});
+		});
+
+		it('Should get a listing by type', (done) => {
+			Mock
+			.expects('find')
+			.withArgs({"type": "villa"})
+			.chain('exec')
+			.resolves(expected);
+
+			agent
+			.get('/listings?type=villa')
+			.end((err, res) => {
+				expect(res.status).to.equal(200);
+				expect(res.body).to.eql(expected);
+				done();
+			});
+		});
+	});
+
+	describe('listings.getById', () => {
+		it('Should get an individuall listing', (done) => {
+			Mock
+			.expects('findById')
+			.withArgs("5cecf112a66bc43a217dfda3")
+			.chain('exec')
+			.resolves(expected);
+
+			agent
+			.get('/listings/5cecf112a66bc43a217dfda3')
+			.end((err, res) => {
+				expect(res.status).to.equal(200);
+				expect(res.body).to.eql(expected);
 				done();
 			});
 		});
