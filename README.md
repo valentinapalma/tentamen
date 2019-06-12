@@ -1,6 +1,6 @@
-# HomneNet
+# HomeNet
 
-Homenet is the new site for selling your house, condo or other properties:
+HomeNet is the new site for selling your house, condo or other properties:
 This API has been blatlantly stolen from our biggest competitor hemnet.
 
 Each listing should contain he following information: coordinate with latitude and longitude, street name and number, location name (such as municipality (kommun) or city district (stadsdel)), type summary (as in condo (bostadsrätt) or villa), price, monthly fee and wether bidding is active or not.
