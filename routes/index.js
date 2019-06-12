@@ -3,6 +3,9 @@ const router = express.Router()
 
 const listing = require('./listing.js')
 
-router.get("/listings", listing.get)
+router.get("/listings", listing.get);
+router.post("/listings", listing.post);
+router.put("/listings/:id", listing.put);
+router.delete("/listings/:id", listing.deleteListing)
 
 module.exports = router
