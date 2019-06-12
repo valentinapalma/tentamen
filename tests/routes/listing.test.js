@@ -119,7 +119,7 @@ describe('Listing Integration tests', () => {
 	});
 
 	describe('listings.post', () => {
-		it('Should be able to create a user', (done) => {
+		it('Should be able to create a listing', (done) => {
 			Mock
 			.expects('create')
 			.withArgs(request)
